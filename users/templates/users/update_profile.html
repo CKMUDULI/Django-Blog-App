@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+    Edit User Profile
+{% endblock %}
+{% block navButtons %}
+    <a type="button" class="btn btn-outline-info me-2" href="{% url 'profile' %}">Profile</a>
+{% endblock %}
+{% block content %}
+    <div class="card my-3">
+        <div class="card-header">
+            <fieldset class="form-group">
+                <legend>Update Profile</legend>
+            </fieldset>
+        </div>
+        <div class="card-body">
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ u_form|crispy }}
+                {{ p_form|crispy }}
+                <button class="btn btn-outline-info" type="submit">Update</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

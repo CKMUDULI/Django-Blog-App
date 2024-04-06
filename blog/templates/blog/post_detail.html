@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}
+    Post '{{ object.title }}' Details
+{% endblock %}
+{% block navButtons %}
+    <a type="button" class="btn btn-outline-info me-2" href="{% url 'profile' %}">Profile</a>
+    <a type="button" class="btn btn-outline-primary me-2" href="{% url 'blog-post-create' %}">Create New Post</a>
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-1">
+            <img class="rounded-circle mt-3" src="{{ object.author.profile.image.url }}" alt="img" width="60px" height="60px">
+        </div>
+        <div class="col-md-11">
+            <div class="card m-3">
+                <div class="card-header">
+                    Posted by - <a class="text-decoration-none" href="{% url 'user-posts' object.author.username %}">{{ object.author }}</a>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ object.title }}</h5>
+                    <p class="card-text">{{ object.content }}</p>
+                </div>
+                <div class="card-footer text-body-secondary">
+                    Posted on - {{ object.date_posted }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container text-center">
+        {% if object.author == user %}
+            <a class="btn btn-outline-success" href="{% url 'blog-post-update' object.id %}">Update Post</a>
+            <a class="btn btn-outline-danger" href="{% url 'blog-post-delete' object.id %}">Delete Post</a>
+        {% endif %} 
+    </div>
+{% endblock %}
